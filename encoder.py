@@ -19,19 +19,19 @@ while True:
     
     if acc > 1.0 / wanted_fps:
         acc -= 1.0 / wanted_fps
-        frame = cv2.resize(frame, (32, 18), interpolation = cv2.INTER_LANCZOS4)
+        frame = cv2.resize(frame, (48, 27), interpolation = cv2.INTER_LANCZOS4)
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         (thresh, frame) = cv2.threshold(frame, 127, 255, cv2.THRESH_BINARY)
 
         out_str += 'FRAME' + str(frame_c) + '\tSTR\t\t'
         frame_c += 1
 
-        for y in range(18):
-            for x in range(5):
+        for y in range(27):
+            for x in range(3):
                 # read 16 bits
                 val = 0
                 for i in range(16):
-                    if frame[y, x + i] != 0:
+                    if frame[y, x * 16 + i] != 0:
                         val |= 1 << i
                 out_str += str(val) + ','
                 size += 1
@@ -42,5 +42,5 @@ while True:
         break
 
 
-out_str = '\t\tMVI\t\tR3, ' + str(size) + '\n' + out_str
+out_str = '\t\tMVI\t\tR1, ' + str(frame_c) + '\n' + out_str
 print(out_str)
