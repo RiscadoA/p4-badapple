@@ -23,7 +23,7 @@ while True:
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         (thresh, frame) = cv2.threshold(frame, 127, 255, cv2.THRESH_BINARY)
 
-        out_str += 'LINE' + str(frame_c) + '\tSTR\t\t'
+        out_str += 'FRAME' + str(frame_c) + '\tSTR\t\t'
         frame_c += 1
 
         for y in range(18):
